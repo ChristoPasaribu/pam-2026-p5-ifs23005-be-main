@@ -53,6 +53,12 @@ class UserService(
 
         val request = call.receive<UpdateProfileRequest>()
 
+        println("===== DEBUG PUT ME =====")
+        println("REQUEST NAME: ${request.name}")
+        println("REQUEST USERNAME: ${request.username}")
+        println("REQUEST ABOUT: ${request.about}")
+        println("========================")
+
         val validator = ValidatorHelper(
             mapOf(
                 "name" to request.name,
