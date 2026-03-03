@@ -14,13 +14,14 @@ suspend fun <T> suspendTransaction(block: Transaction.() -> T): T =
     newSuspendedTransaction(Dispatchers.IO, statement = block)
 
 fun userDAOToModel(dao: UserDAO) = User(
-    dao.id.value.toString(),
-    dao.name,
-    dao.username,
-    dao.password,
-    dao.photo,
-    dao.createdAt,
-    dao.updatedAt
+    id = dao.id.value.toString(),
+    name = dao.name,
+    username = dao.username,
+    password = dao.password,
+    photo = dao.photo,
+    about = dao.about,          // ✅ Tambahan baru
+    createdAt = dao.createdAt,
+    updatedAt = dao.updatedAt
 )
 
 fun refreshTokenDAOToModel(dao: RefreshTokenDAO) = RefreshToken(

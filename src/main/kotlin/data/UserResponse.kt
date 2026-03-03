@@ -9,6 +9,7 @@ data class UserResponse(
     var id: String = "",
     var name: String = "",
     var username: String = "",
+    var about: String? = null,     // ✅ Tambahan baru
     var createdAt: Instant = Clock.System.now(),
     var updatedAt: Instant = Clock.System.now(),
 )

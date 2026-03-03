@@ -38,6 +38,7 @@ class UserService(
                     id = user.id,
                     name = user.name,
                     username = user.username,
+                    about = user.about,
                     createdAt = user.createdAt,
                     updatedAt = user.updatedAt,
                 ),
@@ -50,40 +51,40 @@ class UserService(
     suspend fun putMe(call: ApplicationCall) {
         val user = ServiceHelper.getAuthUser(call, userRepo)
 
-        // Ambil data request
-        val request = call.receive<AuthRequest>()
+        val request = call.receive<UpdateProfileRequest>()
 
-        // Validasi request
-        val validator = ValidatorHelper(request.toMap())
+        val validator = ValidatorHelper(
+            mapOf(
+                "name" to request.name,
+                "username" to request.username
+            )
+        )
+
         validator.required("name", "Nama tidak boleh kosong")
         validator.required("username", "Username tidak boleh kosong")
         validator.validate()
 
-        // periksa user dengan username
         val existUser = userRepo.getByUsername(request.username)
-        if (existUser != null && existUser.username != user.username) {
-            throw AppException(
-                409,
-                "Akun dengan username ini sudah terdaftar!"
-            )
+        if (existUser != null && existUser.id != user.id) {
+            throw AppException(409, "Username sudah digunakan!")
         }
 
-        user.username = request.username
         user.name = request.name
-        val isUpdated = userRepo.update(
-            user.id,
-            user
-        )
+        user.username = request.username
+        user.about = request.about
+
+        val isUpdated = userRepo.update(user.id, user)
         if (!isUpdated) {
-            throw AppException(400, "Gagal memperbarui data profile!")
+            throw AppException(400, "Gagal memperbarui profile!")
         }
 
-        val response = DataResponse(
-            "success",
-            "Berhasil mengubah data profile",
-            null
+        call.respond(
+            DataResponse(
+                "success",
+                "Berhasil mengubah profile",
+                null
+            )
         )
-        call.respond(response)
     }
 
     // mengubah photo profile
