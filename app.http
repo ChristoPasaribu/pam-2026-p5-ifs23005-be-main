@@ -1,6 +1,6 @@
 ## Global Variabel
 #@BaseUrl = https://pam-2026-p5-ifs18005-be.delcom.org:8080
-@BaseUrl = http://127.0.0.1:8000
+@BaseUrl = https://todo.ayam.blog:8080/
 
 ### ---------------------------------------
 ## Auth
@@ -70,7 +70,7 @@ Content-Type: application/json
     client.global.set("userId", response.body.data.user.id);
 %}
 
-### Mengubah informasi akun
+### Mengubah informasi akun + about
 # @name PutUserMe
 PUT {{BaseUrl}}/users/me
 Authorization: Bearer {{authToken}}
@@ -78,7 +78,8 @@ Content-Type: application/json
 
 {
   "name": "Tester Update",
-  "username": "tester"
+  "username": "tester",
+  "about": "Saya adalah mahasiswa informatika yang sedang belajar backend Ktor."
 }
 
 ### Mengubah kata sandi akun
