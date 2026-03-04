@@ -90,7 +90,7 @@ fun Application.configureRouting() {
             // Route Todos
             route("/todos") {
 
-                get("/stats") {
+                get("/statistics") {
                     todoService.getStatistics(call)
                 }
 
