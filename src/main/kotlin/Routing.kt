@@ -119,7 +119,7 @@ fun Application.configureRouting() {
         }
 
         route("/images") {
-            get("users/{id}") {
+            get("users/{id:[0-9a-fA-F-]{36}}") {
                 userService.getPhoto(call)
             }
 
