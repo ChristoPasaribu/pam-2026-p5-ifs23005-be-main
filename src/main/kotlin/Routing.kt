@@ -107,6 +107,9 @@ fun Application.configureRouting() {
                 delete("/{id}") {
                     todoService.delete(call)
                 }
+                get("/stats") {
+                    todoService.getStatistics(call)
+                }
             }
         }
 
