@@ -139,6 +139,14 @@ Content-Type: application/json
     client.global.set("todoId", response.body.data.todoId);
 %}
 
+### ===============================
+### GET TODO STATISTICS
+### ===============================
+
+GET https://todo.ayam.blog:8080/todos/stats
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
 ### Mengambil todo dengan id
 # @name GetTodoById
 GET {{BaseUrl}}/todos/{{todoId}}
