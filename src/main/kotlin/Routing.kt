@@ -93,23 +93,26 @@ fun Application.configureRouting() {
                 get("/stats") {
                     todoService.getStatistics(call)
                 }
-                
+
                 get {
                     todoService.getAll(call)
                 }
                 post {
                     todoService.post(call)
                 }
-                get("/{id}") {
+                get("/{id:[0-9a-fA-F-]{36}}") {
                     todoService.getById(call)
                 }
-                put("/{id}") {
+
+                put("/{id:[0-9a-fA-F-]{36}}") {
                     todoService.put(call)
                 }
-                put("/{id}/cover") {
+
+                put("/{id:[0-9a-fA-F-]{36}}/cover") {
                     todoService.putCover(call)
                 }
-                delete("/{id}") {
+
+                delete("/{id:[0-9a-fA-F-]{36}}") {
                     todoService.delete(call)
                 }
             }
@@ -120,7 +123,7 @@ fun Application.configureRouting() {
                 userService.getPhoto(call)
             }
 
-            get("todos/{id}") {
+            get("todos/{id:[0-9a-fA-F-]{36}}") {
                 todoService.getCover(call)
             }
         }

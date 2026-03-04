@@ -142,7 +142,6 @@ Content-Type: application/json
 ### ===============================
 ### GET TODO STATISTICS
 ### ===============================
-
 GET https://todo.ayam.blog:8080/todos/stats
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
